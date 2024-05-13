@@ -3,6 +3,10 @@ import { createGlobalStyle } from 'styled-components';
 // Breakpoints
 import breakpoints from '../lib/breakpoints';
 
+// Images
+import background from '../images/pride-background.png';
+import noise from '../images/noise.png';
+
 const GlobalStyle = createGlobalStyle`
   :root {
     --max-columns: 16;
@@ -54,7 +58,7 @@ const GlobalStyle = createGlobalStyle`
     }
 
     &::before {
-      background-image: url("/images/pride-background.png");
+      background-image: url("${background}");
       background-repeat: no-repeat;
       background-size: 100% 100%;
       height: max(100vh, 100vw);
@@ -63,7 +67,7 @@ const GlobalStyle = createGlobalStyle`
     }
 
     &::after {
-      background-image: url(/images/noise.png);
+      background-image: url("${noise}");
       background-size: 200px 200px;
       inset: 0;
       opacity: 1;
