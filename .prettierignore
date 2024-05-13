@@ -1,0 +1,14 @@
+dist
+scripts
+node_modules
+.git
+.storybook
+**/*.html
+**/.git
+**/.svn
+**/.hg
+*.mdx
+**/.mdx
+**/README.mdx
+**/*.mdx
+**/node_modules
