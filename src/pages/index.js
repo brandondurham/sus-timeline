@@ -91,7 +91,6 @@ export const query = graphql`
             columnSpan
             id
             label
-            year
           }
           id
         }
