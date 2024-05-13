@@ -1,16 +1,25 @@
 // eslint-disable-next-line no-unused-vars
-import React, { useCallback, useEffect, useState } from 'react';
-import { Fragment } from 'react';
+import React, { Fragment, useCallback, useEffect, useMemo, useState } from 'react';
+import { graphql } from 'gatsby';
+import Markdown from 'react-markdown';
 
 // Styles
 import GlobalStyle from '../styles/global.styled';
 import * as Styled from '../styles/index.styled';
 
-// Content
-import Content from '../content';
-
-const IndexPage = () => {
+const IndexPage = ({ data = {} }) => {
   const [isGridVisible, setIsGridVisible] = useState(false);
+
+  const rows = useMemo(() => {
+    if (data.allDatoCmsRow && data.allDatoCmsRow.edges) {
+      return data.allDatoCmsRow.edges.map(({ node }) => ({
+        entries: node.entries,
+        id: node.id,
+      }));
+    }
+    return [];
+  }, [data]);
+
   const handleKeyDown = useCallback(
     (event) => {
       const wasAnyKeyPressed = ['Escape'].some((key) => event.key === key);
@@ -40,12 +49,18 @@ const IndexPage = () => {
           </Styled.Grid>
         )}
         <Styled.Timeline>
-          {Content.map((row) => (
-            <Styled.Row key={`row-${row[0].id}`}>
-              {row.map(({ columns = 4, content, id, label, type }) => (
-                <Styled.Article $debug={isGridVisible} $span={columns} $type={type} key={id} lang="en">
+          {rows.map(({ entries, id }) => (
+            <Styled.Row key={id}>
+              {entries.map(({ callout, columnSpan, content, id, label }) => (
+                <Styled.Article
+                  $callout={callout}
+                  $debug={isGridVisible}
+                  $span={columnSpan}
+                  key={id}
+                  lang="en"
+                >
                   <Styled.H3>{label}</Styled.H3>
-                  {content}
+                  <Markdown>{content}</Markdown>
                 </Styled.Article>
               ))}
             </Styled.Row>
@@ -64,3 +79,23 @@ export const Head = () => (
     <link href="https://use.typekit.net/nhe5ogp.css" rel="stylesheet"></link>
   </Fragment>
 );
+
+export const query = graphql`
+  query MyQuery {
+    allDatoCmsRow(sort: { position: ASC }) {
+      edges {
+        node {
+          entries {
+            content
+            callout
+            columnSpan
+            id
+            label
+            year
+          }
+          id
+        }
+      }
+    }
+  }
+`;

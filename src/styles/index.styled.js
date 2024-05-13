@@ -44,7 +44,7 @@ export const Column = styled.div`
 `;
 
 export const Timeline = styled.section`
-  align-items: start;
+  /* align-items: start; */
   display: flex;
   flex-direction: row;
   padding: 3px var(--app-padding-x-sm);
@@ -77,18 +77,6 @@ export const Row = styled.div`
 
   &:first-of-type::after {
     inset: 0 100% auto auto;
-  }
-
-  &:last-of-type:after {
-    inset: 0 auto auto 100%;
-  }
-
-  &:last-of-type:is(:nth-child(even)):after {
-    inset: auto auto 0 100%;
-  }
-
-  &:last-of-type:is(:nth-child(odd)):after {
-    inset: auto 100% 0 auto;
   }
 
   @media (${breakpoints.xs}) {
@@ -132,6 +120,18 @@ export const Row = styled.div`
     &:last-of-type::after {
       width: var(--app-padding-x-sm);
     }
+
+    &:last-of-type:after {
+      inset: 0 auto auto 100%;
+    }
+
+    &:last-of-type:is(:nth-child(even)):after {
+      inset: auto auto 0 100%;
+    }
+
+    &:last-of-type:is(:nth-child(odd)):after {
+      inset: auto 100% 0 auto;
+    }
   }
 
   @media (${breakpoints.md}) {
@@ -163,27 +163,31 @@ export const H3 = styled.h3`
 
 export const Article = styled.article`
   box-shadow: ${({ $debug }) => ($debug ? 'inset 0.5px 0 0 red, inset -0.5px 0 0 red' : 'none')};
+  hyphens: auto;
   padding: calc(var(--line-weight) * 2) var(--article-gutter) calc(var(--line-weight) * 3) 0;
   position: relative;
   z-index: 1;
   width: 400px;
 
-  -webkit-hyphens: auto;
-  -moz-hyphens: auto;
-  -ms-hyphens: auto;
-  hyphens: auto;
+  p {
+    margin: 0;
+  }
 
-  ${({ $type }) =>
-    $type === 'callout'
+  p + p {
+    margin-top: 1rem;
+  }
+
+  ${({ $callout }) =>
+    $callout
       ? css`
-          color: var(--line-color);
+          color: var(--callout-color);
           font-family: 'flood-std', sans-serif;
           font-size: 2.4rem;
           font-style: normal;
           font-weight: 400;
           line-height: 1;
+          mix-blend-mode: multiply;
           padding-right: 1ch;
-          text-shadow: 0 0 3px rgb(0 0 0/0.2);
           word-break: break-word;
 
           @media (${breakpoints.xs}) {

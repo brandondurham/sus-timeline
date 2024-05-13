@@ -16,6 +16,7 @@ const GlobalStyle = createGlobalStyle`
     --app-padding-x-sm: calc(var(--app-padding-x) / 4);
     --app-padding-x-md: calc(var(--app-padding-x) / 2);
     --app-padding-y: 42px;
+    --callout-color: rgb(163 147 246);
     --line-color: rgb(255 240 5);
     --line-rounding: 160px;
     --line-weight: 12px;
@@ -26,17 +27,7 @@ const GlobalStyle = createGlobalStyle`
   * { box-sizing: border-box; }
 
   html {
-    background-attachment: fixed;
     background-color: white;
-    /* background-image: linear-gradient(
-      to bottom right,
-      rgb(213 144 233),
-      rgb(181 251 171),
-      rgb(36 255 244),
-      rgb(162 142 255),
-      rgb(213 144 233)
-    );
-    background-size: 100vw 100vh; */
     font-size: 16px;
   }
 

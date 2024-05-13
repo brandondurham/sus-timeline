@@ -2,14 +2,20 @@
  * @type {import('gatsby').GatsbyConfig}
  */
 module.exports = {
+  plugins: [
+    {
+      options: {
+        apiToken: '0bd1e9bb656e42cbe430eb971c8ea9',
+      },
+      resolve: 'gatsby-source-datocms',
+    },
+    'gatsby-plugin-image',
+    'gatsby-plugin-sharp',
+    'gatsby-transformer-sharp',
+    'gatsby-plugin-styled-components',
+  ],
   siteMetadata: {
-    title: `SUS Timeline`,
-    siteUrl: `https://www.yourdomain.tld`
+    siteUrl: 'https://www.yourdomain.tld',
+    title: 'SUS Timeline',
   },
-  plugins: [{
-    resolve: 'gatsby-source-datocms',
-    options: {
-      "apiToken": "0bd1e9bb656e42cbe430eb971c8ea9"
-    }
-  }, "gatsby-plugin-image", "gatsby-plugin-sharp", "gatsby-transformer-sharp", "gatsby-plugin-styled-components"]
 };
