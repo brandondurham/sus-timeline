@@ -190,6 +190,10 @@ export const Article = styled.article`
           padding-right: 1ch;
           word-break: break-word;
 
+          ${H3} {
+            font-weight: 400;
+          }
+
           @media (${breakpoints.xs}) {
             font-size: 1.5rem;
           }
