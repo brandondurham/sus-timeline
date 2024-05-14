@@ -186,7 +186,7 @@ export const Article = styled.article`
           font-style: normal;
           font-weight: 400;
           line-height: 1;
-          /* mix-blend-mode: multiply; */
+          mix-blend-mode: multiply;
           padding-right: 1ch;
           word-break: break-word;
 

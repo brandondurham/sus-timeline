@@ -17,7 +17,6 @@ const GlobalStyle = createGlobalStyle`
     --app-padding-x-md: calc(var(--app-padding-x) / 2);
     --app-padding-y: 42px;
     --callout-color: rgb(163 147 246);
-    --callout-color: gold;
     --line-color: rgb(255 240 5);
     --line-rounding: 160px;
     --line-weight: 12px;
