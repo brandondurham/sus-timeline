@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 // eslint-disable-next-line no-unused-vars
 import React, { Fragment, useCallback, useEffect, useMemo, useState } from 'react';
 import { graphql } from 'gatsby';
@@ -6,6 +7,9 @@ import Markdown from 'react-markdown';
 // Styles
 import GlobalStyle from '../styles/global.styled';
 import * as Styled from '../styles/index.styled';
+
+// Images
+import Logo from '../images/logo.inline.svg';
 
 const IndexPage = ({ data = {} }) => {
   const [isGridVisible, setIsGridVisible] = useState(false);
@@ -49,8 +53,13 @@ const IndexPage = ({ data = {} }) => {
           </Styled.Grid>
         )}
         <Styled.Timeline>
-          {rows.map(({ entries, id }) => (
+          {rows.map(({ entries, id }, index) => (
             <Styled.Row key={id}>
+              {index === 0 && (
+                <Styled.Logo $span={8}>
+                  <Logo />
+                </Styled.Logo>
+              )}
               {entries.map(({ callout, columnSpan, content, id, label }) => (
                 <Styled.Article
                   $callout={callout}

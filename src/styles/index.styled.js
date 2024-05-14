@@ -58,9 +58,9 @@ export const Timeline = styled.section`
 `;
 
 export const Row = styled.div`
+  align-items: start;
   display: flex;
   box-shadow: inset 0 var(--line-weight) 0 var(--line-color);
-  flex-wrap: nowrap;
   position: relative;
 
   &::before,
@@ -80,9 +80,9 @@ export const Row = styled.div`
   }
 
   @media (${breakpoints.xs}) {
+    align-items: stretch;
     box-shadow: inset 0 var(--line-weight) 0 var(--line-color),
       inset 0 calc(var(--line-weight) * -1) 0 var(--line-color);
-    flex-wrap: wrap;
 
     & + & {
       margin-top: calc(var(--line-weight) * -1);
@@ -186,7 +186,7 @@ export const Article = styled.article`
           font-style: normal;
           font-weight: 400;
           line-height: 1;
-          mix-blend-mode: multiply;
+          /* mix-blend-mode: multiply; */
           padding-right: 1ch;
           word-break: break-word;
 
@@ -230,6 +230,32 @@ export const Article = styled.article`
   @media (${breakpoints.md}) {
     &:last-child {
       padding-right: var(--article-gutter);
+    }
+  }
+`;
+
+export const Logo = styled(Article)`
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  padding: calc(var(--line-weight) * 4) 0;
+  position: relative;
+
+  &::before {
+    display: none;
+  }
+
+  & > svg {
+    inset: 50% auto auto calc(var(--app-padding-x-sm) / 2 * -1);
+    position: absolute;
+    transform: translate3d(0, -50%, 0);
+    width: calc(100% + (var(--app-padding-x-sm) / 2) - 36px);
+  }
+
+  @media (${breakpoints.md}) {
+    & > svg {
+      inset: 50% auto auto calc(var(--app-padding-x) / 2 * -1);
+      width: calc(100% + (var(--app-padding-x) / 2) - 36px);
     }
   }
 `;
