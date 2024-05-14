@@ -84,7 +84,7 @@ export default IndexPage;
 
 export const Head = () => (
   <Fragment>
-    <title>Home Page</title>
+    <title>I Know Where I’ve Been — A 2SLGBTQIA+ Historical Timeline</title>
     <link href="https://use.typekit.net/nhe5ogp.css" rel="stylesheet"></link>
   </Fragment>
 );
