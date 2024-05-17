@@ -13,7 +13,6 @@ import * as Styled from '../styles/index.styled';
 import { ReactComponent as Logo } from '../images/logo.inline.svg';
 
 const transition = {
-  delay: 0.5,
   duration: 1,
   ease: [0.16, 1, 0.3, 1],
 };
@@ -64,27 +63,33 @@ const IndexPage = ({ data = {} }) => {
           </Styled.Grid>
         )}
         <Styled.Timeline>
-          {rows.map(({ entries, id }, index) => (
+          {rows.map(({ entries, id }, rowIndex) => (
             <Styled.Row key={id}>
-              {index === 0 && (
+              {rowIndex === 0 && (
                 <Styled.Logo $span={8}>
                   <Logo />
                 </Styled.Logo>
               )}
-              {entries.map(({ callout, columnSpan, content, id, label }) => (
+              {entries.map(({ callout, columnSpan, content, id, label }, articleIndex) => (
                 <Article $callout={callout} $debug={isGridVisible} $span={columnSpan} key={id} lang="en">
                   {isGridVisible ? <Styled.DebugColumn>{columnSpan}</Styled.DebugColumn> : null}
                   {!callout ? (
                     <Marker
                       initial={{ opacity: 0, scale: 2 }}
-                      transition={transition}
+                      transition={{
+                        ...transition,
+                        delay: (articleIndex + rowIndex) * 0.03,
+                      }}
                       viewport={{ once: true }}
                       whileInView={{ opacity: 1, scale: 1 }}
                     />
                   ) : null}
                   <motion.div
                     initial={{ opacity: 0, x: 42 }}
-                    transition={transition}
+                    transition={{
+                      ...transition,
+                      delay: (articleIndex + rowIndex) * 0.03,
+                    }}
                     viewport={{ once: true }}
                     whileInView={{ opacity: 1, x: 0 }}
                   >

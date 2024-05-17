@@ -27,7 +27,7 @@ const GlobalStyle = createGlobalStyle`
   * { box-sizing: border-box; }
 
   html {
-    background-color: white;
+    background-color: var(--line-color);
     font-size: 16px;
   }
 
