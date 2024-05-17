@@ -3,13 +3,50 @@
 import React, { Fragment, useCallback, useEffect, useMemo, useState } from 'react';
 import { graphql } from 'gatsby';
 import Markdown from 'react-markdown';
+import { motion } from 'framer-motion';
 
 // Styles
 import GlobalStyle from '../styles/global.styled';
 import * as Styled from '../styles/index.styled';
 
 // Images
-import Logo from '../images/logo.inline.svg';
+import { ReactComponent as Logo } from '../images/logo.inline.svg';
+
+const transition = {
+  duration: 1,
+  ease: [0.16, 1, 0.3, 1],
+};
+
+const container = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      ...transition,
+      delay: 0.5,
+      staggerChildren: 0.02,
+      when: 'beforeChildren',
+    },
+  },
+};
+
+const article = {
+  hidden: { opacity: 0, x: 42 },
+  show: {
+    opacity: 1,
+    transition,
+    x: 0,
+  },
+};
+
+const marker = {
+  hidden: { opacity: 0, scale: 2 },
+  show: {
+    opacity: 1,
+    scale: 1,
+    transition,
+  },
+};
 
 const IndexPage = ({ data = {} }) => {
   const [isGridVisible, setIsGridVisible] = useState(false);
@@ -41,6 +78,11 @@ const IndexPage = ({ data = {} }) => {
     };
   }, [handleKeyDown]);
 
+  // Motion components
+  const Timeline = useMemo(() => motion(Styled.Timeline), []);
+  const Article = useMemo(() => motion(Styled.Article), []);
+  const Marker = useMemo(() => motion(Styled.Marker), []);
+
   return (
     <Fragment>
       <GlobalStyle />
@@ -52,7 +94,7 @@ const IndexPage = ({ data = {} }) => {
             ))}
           </Styled.Grid>
         )}
-        <Styled.Timeline>
+        <Timeline animate="show" initial="hidden" variants={container}>
           {rows.map(({ entries, id }, index) => (
             <Styled.Row key={id}>
               {index === 0 && (
@@ -61,20 +103,39 @@ const IndexPage = ({ data = {} }) => {
                 </Styled.Logo>
               )}
               {entries.map(({ callout, columnSpan, content, id, label }) => (
-                <Styled.Article
-                  $callout={callout}
-                  $debug={isGridVisible}
-                  $span={columnSpan}
-                  key={id}
-                  lang="en"
-                >
-                  <Styled.H3>{label}</Styled.H3>
-                  <Markdown>{content}</Markdown>
-                </Styled.Article>
+                <Article $callout={callout} $debug={isGridVisible} $span={columnSpan} key={id} lang="en">
+                  {!callout ? (
+                    <Marker
+                      // initial={{ scale: 0 }}
+                      // transition={{
+                      //   delay: 0.5,
+                      //   duration: 1,
+                      //   ease: [0.16, 1, 0.3, 1],
+                      // }}
+                      // viewport={{ once: true }}
+                      // whileInView={{ scale: 1 }}
+                      variants={marker}
+                    />
+                  ) : null}
+                  <motion.div
+                    // initial={{ opacity: 0, y: 100 }}
+                    // transition={{
+                    //   delay: 0.5,
+                    //   duration: 1,
+                    //   ease: [0.16, 1, 0.3, 1],
+                    // }}
+                    // viewport={{ once: true }}
+                    // whileInView={{ opacity: 1, y: 0 }}
+                    variants={article}
+                  >
+                    <Styled.H3>{label}</Styled.H3>
+                    <Markdown>{content}</Markdown>
+                  </motion.div>
+                </Article>
               ))}
             </Styled.Row>
           ))}
-        </Styled.Timeline>
+        </Timeline>
       </Styled.Main>
     </Fragment>
   );

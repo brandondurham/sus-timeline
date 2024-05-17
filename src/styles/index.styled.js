@@ -5,16 +5,15 @@ import breakpoints from '../lib/breakpoints';
 
 export const Main = styled.main`
   margin: 0 auto;
-  max-width: var(--max-app-width);
   min-height: 100vh;
-  padding: var(--app-padding-y) 0;
 
   @media (${breakpoints.xs}) {
-    padding: var(--app-padding-y) var(--app-padding-x-sm);
+    max-width: var(--max-app-width);
+    padding: 0 var(--app-padding-x-sm);
   }
 
   @media (${breakpoints.md}) {
-    padding: var(--app-padding-y) var(--app-padding-x);
+    padding: 0 var(--app-padding-x);
   }
 `;
 
@@ -44,16 +43,28 @@ export const Column = styled.div`
 `;
 
 export const Timeline = styled.section`
-  /* align-items: start; */
   display: flex;
   flex-direction: row;
-  padding: 3px var(--app-padding-x-sm);
+  padding: var(--app-padding-y) var(--app-padding-x-sm);
   position: relative;
+
+  height: 100vh;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  width: 100vw;
 
   @media (${breakpoints.xs}) {
     box-shadow: none;
     flex-direction: column;
-    padding: 0;
+    padding-left: 0;
+    padding-right: 0;
+
+    height: auto;
+    overflow-x: visible;
+    overscroll-behavior-x: auto;
+    scroll-snap-type: none;
+    width: auto;
   }
 `;
 
@@ -166,8 +177,10 @@ export const Article = styled.article`
   hyphens: auto;
   padding: calc(var(--line-weight) * 2) var(--article-gutter) calc(var(--line-weight) * 3) 0;
   position: relative;
+  width: 80vw;
   z-index: 1;
-  width: 400px;
+
+  scroll-snap-align: center;
 
   p {
     margin: 0;
@@ -210,17 +223,7 @@ export const Article = styled.article`
             font-size: 2.1rem;
           }
         `
-      : css`
-          &::before {
-            background-color: rgb(204 57 43);
-            border-radius: 50%;
-            content: '';
-            height: var(--bullet-size);
-            inset: calc((var(--bullet-size) - var(--line-weight)) / 2 * -1) auto auto 0;
-            position: absolute;
-            width: var(--bullet-size);
-          }
-        `}
+      : null}
 
   @media (${breakpoints.xs}) {
     flex-basis: ${({ $span }) => `calc(var(--column-width) * ${$span})`};
@@ -236,6 +239,15 @@ export const Article = styled.article`
       padding-right: var(--article-gutter);
     }
   }
+`;
+
+export const Marker = styled.div`
+  background-color: rgb(204 57 43);
+  border-radius: 50%;
+  height: var(--bullet-size);
+  inset: calc((var(--bullet-size) - var(--line-weight)) / 2 * -1) auto auto 0;
+  position: absolute;
+  width: var(--bullet-size);
 `;
 
 export const Logo = styled(Article)`

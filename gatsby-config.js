@@ -9,14 +9,7 @@ module.exports = {
       },
       resolve: 'gatsby-source-datocms',
     },
-    {
-      options: {
-        rule: {
-          include: /\.inline\.svg$/,
-        },
-      },
-      resolve: 'gatsby-plugin-react-svg',
-    },
+    'gatsby-plugin-svgr',
     'gatsby-plugin-image',
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',

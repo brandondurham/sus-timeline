@@ -32,6 +32,10 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
+    background-attachment: fixed;
+    background-image: url("${noise}"), url("${background}");
+    background-repeat: repeat, no-repeat;
+    background-size: 200px 200px, 100% 100%;
     color: black;
     font-family: "Helvetica Neue", Helvetica, sans-serif;
     font-size: 1.1rem;
@@ -42,29 +46,18 @@ const GlobalStyle = createGlobalStyle`
     position: relative;
     text-wrap: balance;
 
-    &::before,
-    &::after {
+    /* &::before {
+      background-image: url("${noise}"), url("${background}");
+      background-attachment: fixed, fixed;
+      background-repeat: repeat, no-repeat;
+      background-size: 200px 200px, 100% 100%;
       content: "";
-      position: fixed;
-    }
-
-    &::before {
-      background-image: url("${background}");
-      background-repeat: no-repeat;
-      background-size: 100% 100%;
       height: max(100vh, 100vw);
       inset: 0;
-      z-index: 0;
-    }
-
-    &::after {
-      background-image: url("${noise}");
-      background-size: 200px 200px;
-      inset: 0;
-      opacity: 1;
       pointer-events: none;
-      z-index: 1;
-    }
+      position: fixed;
+      z-index: 0;
+    } */
 
     @media (${breakpoints.xs}) {
       font-size: 0.85rem;
