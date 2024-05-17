@@ -13,39 +13,9 @@ import * as Styled from '../styles/index.styled';
 import { ReactComponent as Logo } from '../images/logo.inline.svg';
 
 const transition = {
+  delay: 0.5,
   duration: 1,
   ease: [0.16, 1, 0.3, 1],
-};
-
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      ...transition,
-      delay: 0.5,
-      staggerChildren: 0.02,
-      when: 'beforeChildren',
-    },
-  },
-};
-
-const article = {
-  hidden: { opacity: 0, x: 42 },
-  show: {
-    opacity: 1,
-    transition,
-    x: 0,
-  },
-};
-
-const marker = {
-  hidden: { opacity: 0, scale: 2 },
-  show: {
-    opacity: 1,
-    scale: 1,
-    transition,
-  },
 };
 
 const IndexPage = ({ data = {} }) => {
@@ -79,7 +49,6 @@ const IndexPage = ({ data = {} }) => {
   }, [handleKeyDown]);
 
   // Motion components
-  const Timeline = useMemo(() => motion(Styled.Timeline), []);
   const Article = useMemo(() => motion(Styled.Article), []);
   const Marker = useMemo(() => motion(Styled.Marker), []);
 
@@ -94,7 +63,7 @@ const IndexPage = ({ data = {} }) => {
             ))}
           </Styled.Grid>
         )}
-        <Timeline animate="show" initial="hidden" variants={container}>
+        <Styled.Timeline>
           {rows.map(({ entries, id }, index) => (
             <Styled.Row key={id}>
               {index === 0 && (
@@ -104,29 +73,20 @@ const IndexPage = ({ data = {} }) => {
               )}
               {entries.map(({ callout, columnSpan, content, id, label }) => (
                 <Article $callout={callout} $debug={isGridVisible} $span={columnSpan} key={id} lang="en">
+                  {isGridVisible ? <Styled.DebugColumn>{columnSpan}</Styled.DebugColumn> : null}
                   {!callout ? (
                     <Marker
-                      // initial={{ scale: 0 }}
-                      // transition={{
-                      //   delay: 0.5,
-                      //   duration: 1,
-                      //   ease: [0.16, 1, 0.3, 1],
-                      // }}
-                      // viewport={{ once: true }}
-                      // whileInView={{ scale: 1 }}
-                      variants={marker}
+                      initial={{ opacity: 0, scale: 2 }}
+                      transition={transition}
+                      viewport={{ once: true }}
+                      whileInView={{ opacity: 1, scale: 1 }}
                     />
                   ) : null}
                   <motion.div
-                    // initial={{ opacity: 0, y: 100 }}
-                    // transition={{
-                    //   delay: 0.5,
-                    //   duration: 1,
-                    //   ease: [0.16, 1, 0.3, 1],
-                    // }}
-                    // viewport={{ once: true }}
-                    // whileInView={{ opacity: 1, y: 0 }}
-                    variants={article}
+                    initial={{ opacity: 0, x: 42 }}
+                    transition={transition}
+                    viewport={{ once: true }}
+                    whileInView={{ opacity: 1, x: 0 }}
                   >
                     <Styled.H3>{label}</Styled.H3>
                     <Markdown>{content}</Markdown>
@@ -135,7 +95,7 @@ const IndexPage = ({ data = {} }) => {
               ))}
             </Styled.Row>
           ))}
-        </Timeline>
+        </Styled.Timeline>
       </Styled.Main>
     </Fragment>
   );

@@ -173,7 +173,7 @@ export const H3 = styled.h3`
 `;
 
 export const Article = styled.article`
-  box-shadow: ${({ $debug }) => ($debug ? 'inset 0.5px 0 0 red, inset -0.5px 0 0 red' : 'none')};
+  box-shadow: ${({ $debug }) => ($debug ? 'inset 0 0 0 0.5px red, 0 0 0 0.5px red' : 'none')};
   hyphens: auto;
   padding: calc(var(--line-weight) * 2) var(--article-gutter) calc(var(--line-weight) * 3) 0;
   position: relative;
@@ -233,12 +233,24 @@ export const Article = styled.article`
       padding-right: 0;
     }
   }
+`;
 
-  @media (${breakpoints.md}) {
-    &:last-child {
-      padding-right: var(--article-gutter);
-    }
-  }
+export const DebugColumn = styled.div`
+  align-items: center;
+  aspect-ratio: 1 / 1;
+  background-color: rgb(204 57 43);
+  color: white;
+  display: flex;
+  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-size: 13px;
+  -webkit-font-smoothing: antialiased;
+  font-weight: 700;
+  inset: 50% auto auto 50%;
+  justify-content: center;
+  padding: 6px;
+  position: absolute;
+  transform: translate3d(-50%, -50%, 0);
+  width: 5ch;
 `;
 
 export const Marker = styled.div`
