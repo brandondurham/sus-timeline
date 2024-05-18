@@ -20,7 +20,7 @@ const GlobalStyle = createGlobalStyle`
     --line-color: rgb(255 240 5);
     --line-rounding: 160px;
     --line-weight: 12px;
-    --bullet-size: calc(var(--line-weight) * 1.5);
+    --bullet-size: calc(var(--line-weight) * 1.75);
     --article-gutter: 2ch;
   }
 

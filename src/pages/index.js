@@ -101,20 +101,20 @@ const IndexPage = ({ data = {} }) => {
                   {isGridVisible ? <Styled.DebugColumn>{columnSpan}</Styled.DebugColumn> : null}
                   {!callout ? (
                     <Marker
-                      initial={{ opacity: 0, scale: 2 }}
+                      initial={{ opacity: 0, x: 42 }}
                       transition={{
                         ...transition,
                         delay: (articleIndex + rowIndex) * 0.03,
                       }}
                       viewport={{ once: true }}
-                      whileInView={{ opacity: 1, scale: 1 }}
+                      whileInView={{ opacity: 1, x: 0 }}
                     />
                   ) : null}
                   <motion.div
                     initial={{ opacity: 0, x: 42 }}
                     transition={{
                       ...transition,
-                      delay: (articleIndex + rowIndex) * 0.03,
+                      delay: (articleIndex + rowIndex) * 0.03 + 0.1,
                     }}
                     viewport={{ once: true }}
                     whileInView={{ opacity: 1, x: 0 }}
