@@ -193,6 +193,7 @@ export const Article = styled.article`
   ${({ $callout }) =>
     $callout
       ? css`
+          align-self: center;
           color: var(--callout-color);
           font-family: 'flood-std', sans-serif;
           font-size: 2.4rem;

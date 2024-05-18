@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+
 // eslint-disable-next-line no-unused-vars
 import React, { Fragment, useCallback, useEffect, useMemo, useState } from 'react';
 import { graphql } from 'gatsby';
@@ -18,17 +19,40 @@ const transition = {
 };
 
 const IndexPage = ({ data = {} }) => {
-  const [isGridVisible, setIsGridVisible] = useState(false);
+  const { entries } = data.allDatoCmsTimeline.edges[0].node;
 
-  const rows = useMemo(() => {
-    if (data.allDatoCmsRow && data.allDatoCmsRow.edges) {
-      return data.allDatoCmsRow.edges.map(({ node }) => ({
-        entries: node.entries,
-        id: node.id,
-      }));
+  const getDefinedRowRecords = useCallback(
+    (rowStartId = 0, recordStartId = 0) => {
+      let columns = [];
+      let columnCount = 0;
+      let rowId = rowStartId;
+      for (let i = recordStartId; i < entries.length; i++) {
+        columnCount += entries[i].columnSpan;
+        if ((rowId === 0 && columnCount > 8) || (rowId > 0 && columnCount > 16)) {
+          rowId += 1;
+          break;
+        }
+        columns.push(entries[i]);
+      }
+      return columns;
+    },
+    [entries],
+  );
+
+  const getAllRowRecords = useMemo(() => {
+    let rows = [];
+    let rowIndex = 0;
+    let columnIndex = 0;
+    while (columnIndex < entries.length) {
+      const records = getDefinedRowRecords(rowIndex, columnIndex);
+      rows.push(records);
+      rowIndex += 1;
+      columnIndex = columnIndex + records.length;
     }
-    return [];
-  }, [data]);
+    return rows;
+  }, [entries.length, getDefinedRowRecords]);
+
+  const [isGridVisible, setIsGridVisible] = useState(false);
 
   const handleKeyDown = useCallback(
     (event) => {
@@ -63,8 +87,8 @@ const IndexPage = ({ data = {} }) => {
           </Styled.Grid>
         )}
         <Styled.Timeline>
-          {rows.map(({ entries, id }, rowIndex) => (
-            <Styled.Row key={id}>
+          {getAllRowRecords.map((entries, rowIndex) => (
+            <Styled.Row key={`row-${entries[0].id}`}>
               {rowIndex === 0 && (
                 <Styled.Logo $span={8}>
                   <Logo />
@@ -117,17 +141,16 @@ export const Head = () => (
 
 export const query = graphql`
   query MyQuery {
-    allDatoCmsRow(sort: { position: ASC }) {
+    allDatoCmsTimeline {
       edges {
         node {
           entries {
-            content
             callout
+            content
             columnSpan
             id
             label
           }
-          id
         }
       }
     }
