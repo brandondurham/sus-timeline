@@ -174,7 +174,6 @@ export const H3 = styled.h3`
 
 export const Article = styled.article`
   box-shadow: ${({ $debug }) => ($debug ? 'inset 0 0 0 0.5px red, 0 0 0 0.5px red' : 'none')};
-  hyphens: auto;
   padding: calc(var(--line-weight) * 2) var(--article-gutter) calc(var(--line-weight) * 3) 0;
   position: relative;
   width: 80vw;
