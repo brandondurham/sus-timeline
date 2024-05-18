@@ -18,6 +18,8 @@ const transition = {
   ease: [0.16, 1, 0.3, 1],
 };
 
+const MAX_COLUMNS_PER_ROW = 16;
+
 const IndexPage = ({ data = {} }) => {
   const { entries } = data.allDatoCmsTimeline.edges[0].node;
 
@@ -28,7 +30,7 @@ const IndexPage = ({ data = {} }) => {
       let rowId = rowStartId;
       for (let i = recordStartId; i < entries.length; i++) {
         columnCount += entries[i].columnSpan;
-        if ((rowId === 0 && columnCount > 8) || (rowId > 0 && columnCount > 16)) {
+        if ((rowId === 0 && columnCount > 8) || (rowId > 0 && columnCount > MAX_COLUMNS_PER_ROW)) {
           rowId += 1;
           break;
         }
@@ -81,7 +83,7 @@ const IndexPage = ({ data = {} }) => {
       <Styled.Main>
         {isGridVisible && (
           <Styled.Grid>
-            {[...Array(16).keys()].map((_, index) => (
+            {[...Array(MAX_COLUMNS_PER_ROW).keys()].map((_, index) => (
               <Styled.Column key={`column-${index}`} />
             ))}
           </Styled.Grid>

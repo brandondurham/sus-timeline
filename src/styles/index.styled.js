@@ -205,6 +205,9 @@ export const Article = styled.article`
 
           ${H3} {
             font-weight: 400;
+            &::after {
+              content: ' —';
+            }
           }
 
           @media (${breakpoints.xs}) {
