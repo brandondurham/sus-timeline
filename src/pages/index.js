@@ -12,6 +12,7 @@ import * as Styled from '../styles/index.styled';
 
 // Images
 import { ReactComponent as Logo } from '../images/logo.inline.svg';
+import opengraph from '../images/opengraph.png';
 
 const transition = {
   duration: 1,
@@ -138,6 +139,12 @@ export const Head = () => (
   <Fragment>
     <title>I Know Where I’ve Been — A 2SLGBTQIA+ Historical Timeline</title>
     <link href="https://use.typekit.net/nhe5ogp.css" rel="stylesheet"></link>
+    <meta content="I Know Where I’ve Been — A 2SLGBTQIA+ Historical Timeline" property="og:title" />
+    <meta content="https://sustimeline.netlify.app/" property="og:url" />
+    <meta content={opengraph} property="og:image" />
+    <meta content="article" property="og:type" />
+    <meta content="" property="og:description" />
+    <meta content="en_GB" property="og:locale" />
   </Fragment>
 );
 
