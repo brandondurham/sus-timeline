@@ -142,7 +142,7 @@ export default IndexPage;
 export const Head = () => (
   <Fragment>
     <title>I Know Where I’ve Been — A 2SLGBTQIA+ Historical Timeline</title>
-    <link href="https://use.typekit.net/nhe5ogp.css" rel="stylesheet"></link>
+    <link rel="stylesheet" href="https://use.typekit.net/itj3gco.css" />
     <meta content="I Know Where I’ve Been — A 2SLGBTQIA+ Historical Timeline" property="og:title" />
     <meta content="https://sustimeline.netlify.app/" property="og:url" />
     <meta content={opengraph} property="og:image" />

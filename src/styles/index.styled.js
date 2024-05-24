@@ -168,8 +168,6 @@ export const Article = styled.article`
   position: relative;
   z-index: 1;
 
-  scroll-snap-align: center;
-
   p {
     margin: 0;
   }
@@ -189,7 +187,6 @@ export const Article = styled.article`
           line-height: 1;
           mix-blend-mode: multiply;
           padding-right: 1ch;
-          word-break: break-word;
 
           ${H3} {
             font-weight: 400;
@@ -259,10 +256,7 @@ export const Marker = styled.div`
 `;
 
 export const Logo = styled(Article)`
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  padding: calc(var(--line-weight) * 4) 0;
+  padding: calc(var(--line-weight) * 2) 0;
   position: relative;
 
   &::before {
@@ -270,6 +264,11 @@ export const Logo = styled(Article)`
   }
 
   @media (${breakpoints.xs}) {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    padding: calc(var(--line-weight) * 4) 0;
+
     & > svg {
       inset: 50% auto auto calc(var(--app-padding-x-sm) / 2 * -1);
       position: absolute;
