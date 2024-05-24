@@ -13,7 +13,7 @@ const GlobalStyle = createGlobalStyle`
     --max-app-width: 2000px;
     --column-width: calc((1 / var(--max-columns)) * 100%);
     --app-padding-x: 200px;
-    --app-padding-x-sm: calc(var(--app-padding-x) / 4);
+    --app-padding-x-sm: calc(var(--app-padding-x) / 6);
     --app-padding-x-md: calc(var(--app-padding-x) / 2);
     --app-padding-y: 42px;
     --callout-color: rgb(163 147 246);
@@ -44,23 +44,10 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     position: relative;
-    text-wrap: balance;
-
-    /* &::before {
-      background-image: url("${noise}"), url("${background}");
-      background-attachment: fixed, fixed;
-      background-repeat: repeat, no-repeat;
-      background-size: 200px 200px, 100% 100%;
-      content: "";
-      height: max(100vh, 100vw);
-      inset: 0;
-      pointer-events: none;
-      position: fixed;
-      z-index: 0;
-    } */
 
     @media (${breakpoints.xs}) {
       font-size: 0.85rem;
+      text-wrap: balance;
     }
 
     @media (${breakpoints.sm}) {

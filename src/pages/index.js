@@ -129,6 +129,10 @@ const IndexPage = ({ data = {} }) => {
           ))}
         </Styled.Timeline>
       </Styled.Main>
+      <Styled.Footer>
+        Copyright &copy; {new Date().getFullYear()} <a href="https://susworld.org">SUS</a>. All rights
+        reserved 501(c)(3) nonprofit.
+      </Styled.Footer>
     </Fragment>
   );
 };

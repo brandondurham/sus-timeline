@@ -43,35 +43,25 @@ export const Column = styled.div`
 `;
 
 export const Timeline = styled.section`
+  box-shadow: inset var(--line-weight) 0 0 var(--line-color);
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  margin-left: var(--app-padding-x-sm);
   padding: var(--app-padding-y) var(--app-padding-x-sm);
   position: relative;
-
-  height: 100vh;
-  overflow-x: auto;
-  overscroll-behavior-x: contain;
-  scroll-snap-type: x mandatory;
-  width: 100vw;
 
   @media (${breakpoints.xs}) {
     box-shadow: none;
     flex-direction: column;
+    margin-left: 0;
     padding-left: 0;
     padding-right: 0;
-
-    height: auto;
-    overflow-x: visible;
-    overscroll-behavior-x: auto;
-    scroll-snap-type: none;
-    width: auto;
   }
 `;
 
 export const Row = styled.div`
-  align-items: start;
   display: flex;
-  box-shadow: inset 0 var(--line-weight) 0 var(--line-color);
+  flex-direction: column;
   position: relative;
 
   &::before,
@@ -80,20 +70,14 @@ export const Row = styled.div`
     position: absolute;
   }
 
-  &:first-of-type::after,
-  &:last-of-type::after {
-    border-top: solid var(--line-weight) var(--line-color);
-    width: var(--app-padding-x);
-  }
-
   &:first-of-type::after {
     inset: 0 100% auto auto;
   }
 
   @media (${breakpoints.xs}) {
-    align-items: stretch;
     box-shadow: inset 0 var(--line-weight) 0 var(--line-color),
       inset 0 calc(var(--line-weight) * -1) 0 var(--line-color);
+    flex-direction: row;
 
     & + & {
       margin-top: calc(var(--line-weight) * -1);
@@ -101,6 +85,12 @@ export const Row = styled.div`
 
     &:nth-of-type(1) {
       justify-content: end;
+    }
+
+    &:first-of-type::after,
+    &:last-of-type::after {
+      border-top: solid var(--line-weight) var(--line-color);
+      width: var(--app-padding-x);
     }
 
     &::before {
@@ -174,9 +164,8 @@ export const H3 = styled.h3`
 
 export const Article = styled.article`
   box-shadow: ${({ $debug }) => ($debug ? 'inset 0 0 0 0.5px red, 0 0 0 0.5px red' : 'none')};
-  padding: calc(var(--line-weight) * 2) var(--article-gutter) calc(var(--line-weight) * 3) 0;
+  padding: 0 0 calc(var(--line-weight) * 3) 0;
   position: relative;
-  width: 80vw;
   z-index: 1;
 
   scroll-snap-align: center;
@@ -192,10 +181,9 @@ export const Article = styled.article`
   ${({ $callout }) =>
     $callout
       ? css`
-          align-self: center;
           color: var(--callout-color);
           font-family: 'flood-std', sans-serif;
-          font-size: 2.4rem;
+          font-size: 2rem;
           font-style: normal;
           font-weight: 400;
           line-height: 1;
@@ -211,6 +199,7 @@ export const Article = styled.article`
           }
 
           @media (${breakpoints.xs}) {
+            align-self: center;
             font-size: 1.5rem;
           }
 
@@ -223,14 +212,14 @@ export const Article = styled.article`
           }
 
           @media (${breakpoints.lg}) {
-            font-size: 2.1rem;
+            font-size: 1.9rem;
           }
         `
       : null}
 
   @media (${breakpoints.xs}) {
     flex-basis: ${({ $span }) => `calc(var(--column-width) * ${$span})`};
-    width: auto;
+    padding: calc(var(--line-weight) * 2) var(--article-gutter) calc(var(--line-weight) * 3) 0;
 
     &:last-child {
       padding-right: 0;
@@ -260,9 +249,13 @@ export const Marker = styled.div`
   background-color: rgb(204 57 43);
   border-radius: 50%;
   height: var(--bullet-size);
-  inset: calc((var(--bullet-size) - var(--line-weight)) / 2 * -1) auto auto 0;
+  inset: 0 auto auto calc((var(--app-padding-x-sm) + ((var(--bullet-size) - var(--line-weight)) / 2)) * -1);
   position: absolute;
   width: var(--bullet-size);
+
+  @media (${breakpoints.xs}) {
+    inset: calc((var(--bullet-size) - var(--line-weight)) / 2 * -1) auto auto 0;
+  }
 `;
 
 export const Logo = styled(Article)`
@@ -276,11 +269,13 @@ export const Logo = styled(Article)`
     display: none;
   }
 
-  & > svg {
-    inset: 50% auto auto calc(var(--app-padding-x-sm) / 2 * -1);
-    position: absolute;
-    transform: translate3d(0, -50%, 0);
-    width: calc(100% + (var(--app-padding-x-sm) / 2) - 36px);
+  @media (${breakpoints.xs}) {
+    & > svg {
+      inset: 50% auto auto calc(var(--app-padding-x-sm) / 2 * -1);
+      position: absolute;
+      transform: translate3d(0, -50%, 0);
+      width: calc(100% + (var(--app-padding-x-sm) / 2) - 36px);
+    }
   }
 
   @media (${breakpoints.md}) {
@@ -288,5 +283,19 @@ export const Logo = styled(Article)`
       inset: 50% auto auto calc(var(--app-padding-x) / 2 * -1);
       width: calc(100% + (var(--app-padding-x) / 2) - 36px);
     }
+  }
+`;
+
+export const Footer = styled.footer`
+  color: rgb(0 0 0/0.5);
+  font-size: 0.9rem;
+  padding-bottom: var(--app-padding-y);
+  text-align: center;
+
+  a {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
   }
 `;
