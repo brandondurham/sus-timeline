@@ -260,6 +260,18 @@ export const Marker = styled.div`
   }
 `;
 
+export const IMG = styled.div`
+  aspect-ratio: 222.57/128.89;
+  background-image: url(${LogoStackedPath});
+  height: auto;
+  width: 100%;
+
+  @media (${breakpoints.xs}) {
+    aspect-ratio: 967/92;
+    background-image: url(${LogoPath});
+  }
+`;
+
 export const Logo = styled(Article)`
   padding: calc(var(--line-weight) * 2) 0;
   position: relative;
@@ -274,7 +286,7 @@ export const Logo = styled(Article)`
     justify-content: center;
     padding: calc(var(--line-weight) * 4) 0;
 
-    & > img {
+    & > ${IMG} {
       inset: 50% auto auto calc(var(--app-padding-x-sm) / 2 * -1);
       position: absolute;
       transform: translate3d(0, -50%, 0);
@@ -283,7 +295,7 @@ export const Logo = styled(Article)`
   }
 
   @media (${breakpoints.md}) {
-    & > img {
+    & > ${IMG} {
       inset: 50% auto auto calc(var(--app-padding-x) / 2 * -1);
       width: calc(100% + (var(--app-padding-x) / 2) - 36px);
     }
@@ -301,17 +313,5 @@ export const Footer = styled.footer`
     text-decoration: underline;
     text-decoration-thickness: 1px;
     text-underline-offset: 0.2em;
-  }
-`;
-
-export const IMG = styled.img`
-  aspect-ratio: 222.57/128.89;
-  background-image: url(${LogoStackedPath});
-  height: auto;
-  width: 100%;
-
-  @media (${breakpoints.xs}) {
-    aspect-ratio: 967/92;
-    background-image: url(${LogoPath});
   }
 `;
