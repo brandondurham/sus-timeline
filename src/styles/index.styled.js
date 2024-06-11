@@ -303,15 +303,44 @@ export const Logo = styled(Article)`
 `;
 
 export const Footer = styled.footer`
+  align-items: center;
   color: rgb(0 0 0/0.5);
+  display: flex;
+  flex-direction: column;
   font-size: 0.9rem;
-  padding-bottom: var(--app-padding-y);
+  padding: calc(var(--app-padding-y) / 2) var(--app-padding-y) var(--app-padding-y);
+  row-gap: var(--app-padding-y);
   text-align: center;
+
+  p {
+    margin: 0;
+    padding: 0;
+  }
 
   a {
     color: inherit;
     text-decoration: underline;
-    text-decoration-thickness: 1px;
+    text-decoration-thickness: 0.1em;
     text-underline-offset: 0.2em;
+  }
+`;
+
+export const Notice = styled.div`
+  font-family: 'flood-std', sans-serif;
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 400;
+  hyphens: auto;
+  line-height: 1;
+  max-width: 900px;
+  mix-blend-mode: multiply;
+  text-wrap: balance;
+
+  a:hover {
+    color: var(--callout-color);
+  }
+
+  @media (${breakpoints.xs}) {
+    font-size: 2rem;
   }
 `;

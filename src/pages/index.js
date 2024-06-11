@@ -21,6 +21,7 @@ const transition = {
 const MAX_COLUMNS_PER_ROW = 16;
 
 const IndexPage = ({ data = {} }) => {
+  const notice = data.allDatoCmsNotice.edges[0].node.content;
   const { entries } = data.allDatoCmsTimeline.edges[0].node;
 
   const getDefinedRowRecords = useCallback(
@@ -132,8 +133,13 @@ const IndexPage = ({ data = {} }) => {
         </Styled.Timeline>
       </Styled.Main>
       <Styled.Footer>
-        Copyright &copy; {new Date().getFullYear()} <a href="https://susworld.org">SUS</a>. All rights
-        reserved 501(c)(3) nonprofit.
+        <Styled.Notice>
+          <Markdown>{notice}</Markdown>
+        </Styled.Notice>
+        <p>
+          Copyright &copy; {new Date().getFullYear()} <a href="https://susworld.org">SUS</a>. All rights
+          reserved 501(c)(3) nonprofit.
+        </p>
       </Styled.Footer>
     </Fragment>
   );
@@ -156,6 +162,13 @@ export const Head = () => (
 
 export const query = graphql`
   query MyQuery {
+    allDatoCmsNotice {
+      edges {
+        node {
+          content
+        }
+      }
+    }
     allDatoCmsTimeline {
       edges {
         node {
