@@ -3,6 +3,10 @@ import styled, { css } from 'styled-components';
 // Breakpoints
 import breakpoints from '../lib/breakpoints';
 
+// Images
+import LogoPath from '../images/logo.inline.svg';
+import LogoStackedPath from '../images/logo.inline.stacked.svg';
+
 export const Main = styled.main`
   margin: 0 auto;
   min-height: 100vh;
@@ -184,6 +188,7 @@ export const Article = styled.article`
           font-size: 2rem;
           font-style: normal;
           font-weight: 400;
+          hyphens: auto;
           line-height: 1;
           mix-blend-mode: multiply;
           padding-right: 1ch;
@@ -269,7 +274,7 @@ export const Logo = styled(Article)`
     justify-content: center;
     padding: calc(var(--line-weight) * 4) 0;
 
-    & > svg {
+    & > img {
       inset: 50% auto auto calc(var(--app-padding-x-sm) / 2 * -1);
       position: absolute;
       transform: translate3d(0, -50%, 0);
@@ -278,7 +283,7 @@ export const Logo = styled(Article)`
   }
 
   @media (${breakpoints.md}) {
-    & > svg {
+    & > img {
       inset: 50% auto auto calc(var(--app-padding-x) / 2 * -1);
       width: calc(100% + (var(--app-padding-x) / 2) - 36px);
     }
@@ -296,5 +301,17 @@ export const Footer = styled.footer`
     text-decoration: underline;
     text-decoration-thickness: 1px;
     text-underline-offset: 0.2em;
+  }
+`;
+
+export const IMG = styled.img`
+  aspect-ratio: 222.57/128.89;
+  background-image: url(${LogoStackedPath});
+  height: auto;
+  width: 100%;
+
+  @media (${breakpoints.xs}) {
+    aspect-ratio: 967/92;
+    background-image: url(${LogoPath});
   }
 `;

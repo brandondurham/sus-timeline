@@ -11,7 +11,6 @@ import GlobalStyle from '../styles/global.styled';
 import * as Styled from '../styles/index.styled';
 
 // Images
-import { ReactComponent as Logo } from '../images/logo.inline.svg';
 import opengraph from '../images/opengraph.png';
 
 const transition = {
@@ -94,7 +93,10 @@ const IndexPage = ({ data = {} }) => {
             <Styled.Row key={`row-${entries[0].id}`}>
               {rowIndex === 0 && (
                 <Styled.Logo $span={8}>
-                  <Logo />
+                  <Styled.IMG
+                    alt="I Know Where I’ve Been — A 2SLGBTQIA+ Historical Timeline."
+                    src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+                  />
                 </Styled.Logo>
               )}
               {entries.map(({ callout, columnSpan, content, id, label }, articleIndex) => (

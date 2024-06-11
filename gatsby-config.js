@@ -13,7 +13,7 @@ module.exports = {
       options: {
         background_color: 'rgb(255 240 5)',
         display: 'standalone',
-        icon: 'src/images/manifest.png',
+        icon: 'src/images/favicon.svg',
         name: 'I Know Where I’ve Been — A 2SLGBTQIA+ Historical Timeline',
         short_name: 'I Know Where I’ve Been — A 2SLGBTQIA+ Historical Timeline',
         start_url: '/',
@@ -29,7 +29,7 @@ module.exports = {
     'gatsby-plugin-styled-components',
   ],
   siteMetadata: {
-    siteUrl: 'https://www.yourdomain.tld',
-    title: 'SUS Timeline',
+    siteUrl: 'https://timeline.susworld.org',
+    title: 'I Know Where I’ve Been — A 2SLGBTQIA+ Historical Timeline',
   },
 };
