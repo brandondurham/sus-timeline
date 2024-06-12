@@ -19,6 +19,7 @@ const transition = {
 };
 
 const MAX_COLUMNS_PER_ROW = 16;
+const LOGO_COLUMN_COUNT = 10;
 
 const IndexPage = ({ data = {} }) => {
   const notice = data.allDatoCmsNotice.edges[0].node.content;
@@ -31,7 +32,10 @@ const IndexPage = ({ data = {} }) => {
       let rowId = rowStartId;
       for (let i = recordStartId; i < entries.length; i++) {
         columnCount += entries[i].columnSpan;
-        if ((rowId === 0 && columnCount > 8) || (rowId > 0 && columnCount > MAX_COLUMNS_PER_ROW)) {
+        if (
+          (rowId === 0 && columnCount > MAX_COLUMNS_PER_ROW - LOGO_COLUMN_COUNT) ||
+          (rowId > 0 && columnCount > MAX_COLUMNS_PER_ROW)
+        ) {
           rowId += 1;
           break;
         }
@@ -93,7 +97,7 @@ const IndexPage = ({ data = {} }) => {
           {getAllRowRecords.map((entries, rowIndex) => (
             <Styled.Row key={`row-${entries[0].id}`}>
               {rowIndex === 0 && (
-                <Styled.Logo $span={8}>
+                <Styled.Logo $span={LOGO_COLUMN_COUNT}>
                   <Styled.IMG
                     alt="I Know Where I’ve Been — A 2SLGBTQIA+ Historical Timeline."
                     src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="

@@ -87,9 +87,9 @@ export const Row = styled.div`
       margin-top: calc(var(--line-weight) * -1);
     }
 
-    &:nth-of-type(1) {
+    /* &:nth-of-type(1) {
       justify-content: end;
-    }
+    } */
 
     &:first-of-type::after,
     &:last-of-type::after {
@@ -263,17 +263,10 @@ export const Marker = styled.div`
 export const IMG = styled.div`
   aspect-ratio: 222.57/128.89;
   background-image: url(${LogoStackedPath});
-  height: auto;
-  width: 100%;
-
-  @media (${breakpoints.xs}) {
-    aspect-ratio: 967/92;
-    background-image: url(${LogoPath});
-  }
+  max-width: 500px;
 `;
 
 export const Logo = styled(Article)`
-  padding: calc(var(--line-weight) * 2) 0;
   position: relative;
 
   &::before {
@@ -281,24 +274,8 @@ export const Logo = styled(Article)`
   }
 
   @media (${breakpoints.xs}) {
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    padding: calc(var(--line-weight) * 4) 0;
-
-    & > ${IMG} {
-      inset: 50% auto auto calc(var(--app-padding-x-sm) / 2 * -1);
-      position: absolute;
-      transform: translate3d(0, -50%, 0);
-      width: calc(100% + (var(--app-padding-x-sm) / 2) - 36px);
-    }
-  }
-
-  @media (${breakpoints.md}) {
-    & > ${IMG} {
-      inset: 50% auto auto calc(var(--app-padding-x) / 2 * -1);
-      width: calc(100% + (var(--app-padding-x) / 2) - 36px);
-    }
+    align-self: center;
+    padding: 36px 24px 36px 0;
   }
 `;
 
