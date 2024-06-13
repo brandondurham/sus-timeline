@@ -264,7 +264,7 @@ export const Marker = styled.div`
 export const IMG = styled.div`
   aspect-ratio: 222.57/128.89;
   background-image: url(${LogoStackedPath});
-  max-width: 500px;
+  max-width: 90%;
 `;
 
 export const Logo = styled(Article)`
