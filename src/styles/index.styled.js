@@ -170,6 +170,7 @@ export const Article = styled.article`
   box-shadow: ${({ $debug }) => ($debug ? 'inset 0 0 0 0.5px red, 0 0 0 0.5px red' : 'none')};
   padding: 0 0 calc(var(--line-weight) * 3) 0;
   position: relative;
+  text-wrap: pretty;
   z-index: 1;
 
   p {
